@@ -7,10 +7,11 @@
 
   try {
     // Get the client IP using the IP data API service
-    const ipResponse = await axios.get(`https://api.ipdata.co/?api-key=${IP_DATA_API_KEY}`);
+    const ipResponse = await fetch(`https://api.ipdata.co?api-key=${IP_DATA_API_KEY}`);    
     
     if (ipResponse.status === 200) {
-      const clientIp = ipResponse.data.ip;
+      const ipData = await ipResponse.json();
+      const clientIp = ipData.ip;
 
       // Gather the data you want to send, including the client IP address
       const dataToSend = {
